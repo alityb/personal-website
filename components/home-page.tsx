@@ -301,6 +301,7 @@ export default function HomePage() {
               </form>
             </div>
           </section>
+        </div>
       </main>
     </>
   )
