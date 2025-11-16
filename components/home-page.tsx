@@ -47,14 +47,17 @@ export default function HomePage() {
             </div>
 
             <div className="space-y-1 font-mono text-sm md:text-base">
-              <p className="text-[#5c6370]">cs @ cmu.</p>
-              <p>
+              <p className="text-[#5c6370]">cs @ cmu. interested in systems, dev tools and under-the-hood optimization. i like sports, speedcubing and music too! currently exploring nlp. </p>
+              <br />
+              <p className="text-[#5c6370]">
+                feel free to reach out at{" "}
                 <a
                   href="mailto:ali.moh.islam.1@gmail.com"
                   className="text-[#98c379] hover:text-[#61afef] transition-colors"
                 >
                   ali.moh.islam.1@gmail.com
                 </a>
+                
               </p>
             </div>
           </div>
@@ -66,11 +69,11 @@ export default function HomePage() {
               <h2 className="font-mono text-2xl text-[#98c379] flex items-center gap-2">
                 <span className="text-[#61afef]">~/</span>experiences
               </h2>
-              <div className="space-y-2">
+              <div className="space-y-4">
                 {workExperiences.map((work, index) => (
                   <div
                     key={work.id}
-                    className="border border-dashed border-[#262626] rounded-lg p-4 bg-[#0a0a0a] hover:border-[#98c379]/20 transition-colors"
+                    className="border border-dashed border-[#262626] rounded-lg p-6 bg-[#0a0a0a] hover:border-[#98c379]/20 transition-colors"
                   >
                     <div className="space-y-2">
                       <div className="flex items-baseline gap-3 flex-wrap">
@@ -114,20 +117,22 @@ export default function HomePage() {
                     className="border border-dashed border-[#262626] rounded-lg p-6 bg-[#0a0a0a] hover:border-[#98c379]/20 transition-colors"
                   >
                     <div className="space-y-2">
-                      {project.link ? (
-                        <a
-                          href={project.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="font-mono text-sm text-[#98c379] underline decoration-[#98c379]/30 hover:decoration-[#98c379]/60 hover:text-[#61afef] underline-offset-2 transition-colors inline-block"
-                        >
-                          {project.name}
-                        </a>
-                      ) : (
-                        <h3 className="font-mono text-sm text-[#98c379] underline decoration-[#98c379]/30 hover:decoration-[#98c379]/60 underline-offset-2 transition-colors">
-                          {project.name}
-                        </h3>
-                      )}
+                      <div className="flex items-baseline gap-3">
+                        {project.link ? (
+                          <a
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-mono text-sm text-[#98c379] underline decoration-[#98c379]/30 hover:decoration-[#98c379]/60 hover:text-[#61afef] underline-offset-2 transition-colors"
+                          >
+                            {project.name}
+                          </a>
+                        ) : (
+                          <h3 className="font-mono text-sm text-[#98c379] underline decoration-[#98c379]/30 hover:decoration-[#98c379]/60 underline-offset-2 transition-colors">
+                            {project.name}
+                          </h3>
+                        )}
+                      </div>
                       <p className="font-mono text-xs text-[#5c6370] leading-relaxed">{project.description}</p>
                       {project.tech && project.tech.length > 0 && (
                         <div className="flex flex-wrap gap-2 pt-1">
@@ -187,19 +192,6 @@ export default function HomePage() {
                           {pub.venue}, {pub.year}
                         </p>
                       </div>
-                      {pub.tags && pub.tags.length > 0 && (
-                        <div className="flex flex-wrap gap-2 pt-1">
-                          {pub.tags.map((tag, tagIdx) => (
-                            <span
-                              key={tagIdx}
-                              className="text-xs font-mono text-[#5c6370]"
-                            >
-                              {tag}
-                              {tagIdx < pub.tags!.length - 1 && ","}
-                            </span>
-                          ))}
-                        </div>
-                      )}
                       {pub.link && (
                         <a
                           href={pub.link}
