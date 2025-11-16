@@ -301,15 +301,6 @@ export default function HomePage() {
               </form>
             </div>
           </section>
-
-          <div className="fixed bottom-8 right-8 text-xs text-muted-foreground/40 font-mono space-y-1 pointer-events-none">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-              <span>system online</span>
-            </div>
-            <div>uptime: {Math.floor(Date.now() / 1000 / 60 / 60 / 24)} days</div>
-          </div>
-        </div>
       </main>
     </>
   )
