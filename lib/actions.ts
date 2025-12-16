@@ -67,8 +67,8 @@ export const sendEmail = async (prevState: any, formData: FormData) => {
       text: `From: ${name}\nEmail: ${email}\n\n${message}`,
     })
 
-    // Log success for debugging - log the full response structure
-    console.log("Email sent successfully. Response:", JSON.stringify(data, null, 2))
+    // Log success for debugging (without sensitive data)
+    console.log("Email sent successfully")
   } catch (error) {
     // Log the full error for debugging
     console.error("Error sending email:", error)
@@ -104,7 +104,7 @@ export const sendEmail = async (prevState: any, formData: FormData) => {
   }
 
   if (!emailId) {
-    console.error("Resend response missing id field. Full response:", JSON.stringify(data, null, 2))
+    console.error("Resend response missing id field")
     // Still return success if we got a response - the email might have been sent
     // Some Resend responses might not include id in certain cases
     return {

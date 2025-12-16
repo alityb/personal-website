@@ -47,7 +47,25 @@ export default function HomePage() {
             </div>
 
             <div className="space-y-1 font-mono text-sm md:text-base">
-              <p className="text-[#5c6370]">cs @ cmu. interested in systems, dev tools and under-the-hood optimization. i like sports, speedcubing and music too! currently exploring nlp. </p>
+              <p className="text-[#5c6370]">cs @ cmu. interested in systems, dev tools and under-the-hood optimization. i like sports,{" "}
+                <a
+                  href="https://www.worldcubeassociation.org/persons/2024TAYE01"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline decoration-[#5c6370]/30 hover:decoration-[#5c6370]/50 underline-offset-2"
+                >
+                  speedcubing
+                </a>
+                {" "}and{" "}
+                <a
+                  href="https://www.last.fm/user/amtayeb"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline decoration-[#5c6370]/30 hover:decoration-[#5c6370]/50 underline-offset-2"
+                >
+                  music
+                </a>
+                {" "}too! currently exploring nlp. </p>
               <br />
               <p className="text-[#5c6370]">
                 feel free to reach out at{" "}

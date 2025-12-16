@@ -24,7 +24,7 @@ export async function GET() {
       : cleanUrl
     rssUrl = `${rssUrl}/feed`
     
-    console.log("Fetching Substack RSS from:", rssUrl)
+    // Fetching Substack RSS feed
     
     // Fetch the feed manually first to handle redirects
     const response = await fetch(rssUrl, {
