@@ -7,9 +7,21 @@ import "./globals.css"
 const geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "ali tayeb - portfolio",
-  description: "Carnegie Mellon CS student exploring software, ML, and web dev",
+  title: "ali tayeb",
+  description: "cs @ cmu. interested in systems, dev tools and under-the-hood optimization.",
   generator: "v0.app",
+  openGraph: {
+    title: "ali tayeb",
+    description: "cs @ cmu. interested in systems, dev tools and under-the-hood optimization.",
+    url: "https://amtayeb.dev",
+    siteName: "ali tayeb",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "ali tayeb",
+    description: "cs @ cmu. interested in systems, dev tools and under-the-hood optimization.",
+  },
 }
 
 export default function RootLayout({
