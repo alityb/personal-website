@@ -8,11 +8,10 @@ const geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "ali tayeb",
-  description: "cs @ cmu. interested in systems, dev tools and under-the-hood optimization.",
-  generator: "v0.app",
+  description: "cs @ cmu. interested in systems, and dev tools.",
   openGraph: {
     title: "ali tayeb",
-    description: "cs @ cmu. interested in systems, dev tools and under-the-hood optimization.",
+    description: "cs @ cmu. interested in systems, and dev tools.",
     url: "https://amtayeb.dev",
     siteName: "ali tayeb",
     type: "website",
@@ -20,7 +19,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary",
     title: "ali tayeb",
-    description: "cs @ cmu. interested in systems, dev tools and under-the-hood optimization.",
+    description: "cs @ cmu. interested in systems, and dev tools.",
   },
 }
 

@@ -75,6 +75,15 @@ export const workExperiences: WorkExperience[] = [
 
 export const projects: Project[] = [
   {
+    id: "f1muse",
+    name: "f1muse",
+    description: 
+      "f1 analytics platform with natural language querying, statmuse for f1.", 
+    tech: ["TypeScript", "React", "Next.js", "PosgreSQL", "Python"], 
+    outcomes: ["secure api with rate limiting, bot detection and input validation", "designed caching strategy with TTL optimization", "etl pipeline ingesting multiple data sources"], 
+    link: "f1muse.com",
+  },
+  {
     id: "synccli",
     name: "synccli",
     description:

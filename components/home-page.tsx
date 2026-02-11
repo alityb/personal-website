@@ -47,7 +47,7 @@ export default function HomePage() {
             </div>
 
             <div className="space-y-1 font-mono text-sm md:text-base">
-              <p className="text-[#5c6370]">cs @ cmu. interested in systems, dev tools and under-the-hood optimization. i like sports,{" "}
+              <p className="text-[#5c6370]">cs @ cmu. interested in systems, and dev tools. i like sports,{" "}
                 <a
                   href="https://www.worldcubeassociation.org/persons/2024TAYE01"
                   target="_blank"
@@ -65,7 +65,7 @@ export default function HomePage() {
                 >
                   music
                 </a>
-                {" "}too! currently exploring nlp. </p>
+                {" "}too! currently exploring cuda. </p>
               <br />
               <p className="text-[#5c6370]">
                 feel free to reach out at{" "}
