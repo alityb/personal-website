@@ -62,7 +62,7 @@ export const workExperiences: WorkExperience[] = [
     period: "jul '23 - sep '24",
     story:
       "convinced my mentor to pursue an ML project for the first time. researched deep learning applications in polymers.",
-    tags: ["Machine Learning", "Python", "TensorFlow"],
+    tags: ["Machine Learning", "Python", "PyTorch"],
   },
   {
     id: "bas",
@@ -81,10 +81,10 @@ export const projects: Project[] = [
     name: "kerndiff",
     description:
       "kernel-level diff tool.",
-    tech: ["C", "C++"],
+    tech: ["C", "C++", "CUDA", "Python", "CLI"],
     outcomes: [],
     github: "https://github.com/alityb/kerndiff",
-    blog: "",
+    blog: "https://tperm.xyz/unbound/",
   },
   {
     id: "f1muse",
@@ -95,7 +95,7 @@ export const projects: Project[] = [
     outcomes: ["secure api with rate limiting, bot detection and input validation", "designed caching strategy with TTL optimization", "etl pipeline ingesting multiple data sources"],
     link: "https://f1muse.com",
     github: "https://github.com/alityb/f1muse",
-    blog: "",
+    blog: "https://tperm.xyz/latency-to-insight/",
   },
   {
     id: "synccli",
