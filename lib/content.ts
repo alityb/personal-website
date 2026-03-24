@@ -83,7 +83,6 @@ export const projects: Project[] = [
       "hyperfine for GPU kernels; profile and compare 2 kernels in seconds.",
     tech: ["CUDA", "Python", "CLI", "Triton"],
     outcomes: [],
-    link: "https://github.com/alityb/kerndiff/",
     github: "https://github.com/alityb/kerndiff",
     blog: "https://tperm.xyz/unbound/",
   },

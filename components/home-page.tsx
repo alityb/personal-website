@@ -5,6 +5,8 @@ import Header from "@/components/header"
 import CleanGridBackground from "@/components/clean-grid-background"
 import SubstackBlog from "@/components/substack-blog"
 import LastPlayed from "@/components/last-played"
+import KeyboardShortcuts from "@/components/keyboard-shortcuts"
+import { ContactModal, ContactTrigger } from "@/components/contact-modal"
 import { workExperiences, projects } from "@/lib/content"
 
 export default function HomePage() {
@@ -24,6 +26,8 @@ export default function HomePage() {
       <CleanGridBackground />
       <Header />
       <LastPlayed />
+      <KeyboardShortcuts />
+      <ContactModal />
 
       <main className="min-h-screen relative z-10 pt-20 pb-24">
         <div className="fixed inset-0 pointer-events-none z-20 scanlines opacity-5" />
@@ -72,6 +76,7 @@ export default function HomePage() {
                 >
                   ali.moh.islam.1@gmail.com
                 </a>
+                {" "}or <ContactTrigger />
               </p>
             </div>
           </div>
