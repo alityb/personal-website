@@ -14,6 +14,8 @@ export interface Project {
   tech: string[]
   outcomes: string[]
   link?: string
+  github?: string
+  blog?: string
 }
 
 export interface Publication {
@@ -41,7 +43,7 @@ export const workExperiences: WorkExperience[] = [
     role: "Software Engineer",
     period: "aug '25 - present",
     story:
-      "tinkering campuse-wide applications for CMU students.",
+      "tinkering campus-wide applications for CMU students.",
     tags: ["Rust"],
   },
   {
@@ -55,7 +57,7 @@ export const workExperiences: WorkExperience[] = [
   },
   {
     id: "kfupm",
-    company: "King Fahd University of Petroleum & Minerals",
+    company: "KFUPM",
     role: "Research Assistant",
     period: "jul '23 - sep '24",
     story:
@@ -64,7 +66,7 @@ export const workExperiences: WorkExperience[] = [
   },
   {
     id: "bas",
-    company: "Bulgarian Academy of Sciences",
+    company: "BAS",
     role: "Research Intern",
     period: "sep '23 - oct '23",
     story:
@@ -75,13 +77,25 @@ export const workExperiences: WorkExperience[] = [
 
 export const projects: Project[] = [
   {
+    id: "kerndiff",
+    name: "kerndiff",
+    description:
+      "kernel-level diff tool.",
+    tech: ["C", "C++"],
+    outcomes: [],
+    github: "https://github.com/alityb/kerndiff",
+    blog: "",
+  },
+  {
     id: "f1muse",
     name: "f1muse",
-    description: 
-      "f1 analytics platform with natural language querying, statmuse for f1.", 
-    tech: ["TypeScript", "React", "Next.js", "PosgreSQL", "Python"], 
-    outcomes: ["secure api with rate limiting, bot detection and input validation", "designed caching strategy with TTL optimization", "etl pipeline ingesting multiple data sources"], 
+    description:
+      "f1 analytics platform with natural language querying, statmuse for f1.",
+    tech: ["TypeScript", "React", "Next.js", "PostgreSQL", "Python"],
+    outcomes: ["secure api with rate limiting, bot detection and input validation", "designed caching strategy with TTL optimization", "etl pipeline ingesting multiple data sources"],
     link: "https://f1muse.com",
+    github: "https://github.com/alityb/f1muse",
+    blog: "",
   },
   {
     id: "synccli",
@@ -90,7 +104,7 @@ export const projects: Project[] = [
       "a lightweight rsync-like tool for developers.",
     tech: ["C++", "CLI", "POSIX", "std::regex"],
     outcomes: ["instant codebase sharing", "LLM-friendly formatting", "smart file filtering", "cross-platform support"],
-    link: "https://github.com/alityb/synccli",
+    github: "https://github.com/alityb/synccli",
   },
   {
     id: "smartfilecmd",
@@ -104,7 +118,7 @@ export const projects: Project[] = [
       "terminal-native experience",
       "batch operations support",
     ],
-    link: "https://github.com/alityb/smartfilecmd",
+    github: "https://github.com/alityb/smartfilecmd",
   },
 ]
 

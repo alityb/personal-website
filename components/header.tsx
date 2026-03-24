@@ -2,7 +2,6 @@
 
 import Link from "next/link"
 import { Github, Linkedin, Mail } from "lucide-react"
-import LastPlayed from "./last-played"
 
 export default function Header() {
   return (
@@ -13,7 +12,6 @@ export default function Header() {
             <Link href="/" className="text-[#abb2bf] hover:text-[#98c379] transition-colors">
               ali
             </Link>
-            <LastPlayed />
           </div>
 
           <div className="flex items-center gap-4">

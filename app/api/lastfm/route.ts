@@ -30,6 +30,9 @@ export async function GET() {
         name: recentTrack.name,
         artist: recentTrack.artist["#text"] || recentTrack.artist.name || "",
         url: recentTrack.url,
+        nowPlaying: recentTrack["@attr"]?.nowplaying === "true",
+        image: recentTrack.image?.find((img) => img.size === "large")?.["#text"] || "",
+        dateUts: recentTrack.date?.uts || null,
       })
     }
 

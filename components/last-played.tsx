@@ -2,58 +2,94 @@
 
 import { useEffect, useState } from "react"
 import { fetchRecentTracks } from "@/lib/utils/lastfm"
-import type { Track } from "@/lib/types/lastfm"
+
+function timeAgo(uts: string | null): string {
+  if (!uts) return "recently"
+  const seconds = Math.floor(Date.now() / 1000) - parseInt(uts)
+  const minutes = Math.floor(seconds / 60)
+  const hours = Math.floor(minutes / 60)
+  const days = Math.floor(hours / 24)
+  if (days > 0) return `${days}d ago`
+  if (hours > 0) return `${hours}h ago`
+  if (minutes > 0) return `${minutes}m ago`
+  return "just now"
+}
 
 export default function LastPlayed() {
-  const [track, setTrack] = useState<Track | null>(null)
-  const [loading, setLoading] = useState(true)
+  const [data, setData] = useState<{
+    name: string
+    artist: string
+    url: string
+    nowPlaying: boolean
+    image: string
+    dateUts: string | null
+  } | null>(null)
+  const [loaded, setLoaded] = useState(false)
+  const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    const loadTrack = async () => {
-      const data = await fetchRecentTracks()
-      setTrack(data)
-      setLoading(false)
+    const load = async () => {
+      const result = await fetchRecentTracks()
+      setData(result)
+      setLoaded(true)
+      if (result) setTimeout(() => setVisible(true), 100)
     }
-
-    loadTrack()
-    // Refresh every 30 seconds
-    const interval = setInterval(loadTrack, 30000)
+    load()
+    const interval = setInterval(load, 30000)
     return () => clearInterval(interval)
   }, [])
 
-  const label = track
-    ? `${track.name} by ${track.artist["#text"]}`
-    : loading
-    ? "loading…"
-    : "song name - artist name"
+  if (!loaded || !data) return null
 
-  if (loading) {
-    return (
-      <span className="text-[#5c6370] text-xs font-mono hidden sm:inline">
-        last played: <span className="text-[#abb2bf]">loading…</span>
-      </span>
-    )
-  }
+  const label = data.nowPlaying ? "now playing" : `played ${timeAgo(data.dateUts)}`
+
+  const inner = (
+    <div
+      className={`
+        flex items-center gap-3
+        border border-dashed border-[#262626] hover:border-[#98c379]/20
+        rounded-lg px-4 py-2.5 bg-[#0a0a0a]/90 backdrop-blur-sm
+        transition-all duration-500
+        ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}
+      `}
+    >
+      {data.image ? (
+        <img
+          src={data.image}
+          alt={data.name}
+          className="w-8 h-8 rounded object-cover opacity-90 shrink-0"
+        />
+      ) : (
+        <div className="w-8 h-8 rounded bg-[#141414] border border-[#1e1e1e] shrink-0 flex items-center justify-center font-mono text-[#3e4451] text-xs">
+          ♫
+        </div>
+      )}
+      <div className="min-w-0">
+        <p className="font-mono text-[10px] text-[#3e4451] leading-none mb-0.5 flex items-center gap-1.5">
+          {data.nowPlaying && (
+            <span className="relative flex h-1.5 w-1.5 shrink-0">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#98c379] opacity-75" />
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#98c379]" />
+            </span>
+          )}
+          {label}
+        </p>
+        <p className="font-mono text-xs text-[#abb2bf] truncate max-w-[180px]">
+          {data.name} — {data.artist}
+        </p>
+      </div>
+    </div>
+  )
+
+  const wrapped = data.url ? (
+    <a href={data.url} target="_blank" rel="noopener noreferrer">
+      {inner}
+    </a>
+  ) : inner
 
   return (
-    <span className="text-[#5c6370] text-xs font-mono hidden sm:inline">
-      last played:{" "}
-      {track?.url ? (
-        <a
-          href={track.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-[#98c379] hover:text-[#61afef] transition-colors cursor-pointer underline decoration-[#98c379]/30 hover:decoration-[#61afef]/50 underline-offset-2"
-          title={label}
-        >
-          {track.name} - {track.artist["#text"]}
-        </a>
-      ) : (
-        <span className="text-[#98c379] cursor-default" title={label}>
-          {label}
-        </span>
-      )}
-    </span>
+    <div className="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 hidden sm:block">
+      {wrapped}
+    </div>
   )
 }
-

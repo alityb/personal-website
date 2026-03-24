@@ -1,41 +1,38 @@
 "use client"
 
-import type React from "react"
-
-import { useEffect, useState, useActionState } from "react"
+import { useEffect, useState } from "react"
 import Header from "@/components/header"
 import CleanGridBackground from "@/components/clean-grid-background"
 import SubstackBlog from "@/components/substack-blog"
-import { workExperiences, projects, publications } from "@/lib/content"
-import { sendEmail } from "@/lib/actions"
+import LastPlayed from "@/components/last-played"
+import { workExperiences, projects } from "@/lib/content"
 
 export default function HomePage() {
   const [showCursor, setShowCursor] = useState(true)
   const [mounted, setMounted] = useState(false)
-  const [state, formAction, isPending] = useActionState(sendEmail, null)
 
   useEffect(() => {
     setMounted(true)
     const interval = setInterval(() => {
       setShowCursor((prev) => !prev)
     }, 530)
-
-    return () => {
-      clearInterval(interval)
-    }
+    return () => clearInterval(interval)
   }, [])
 
   return (
     <>
       <CleanGridBackground />
-
       <Header />
-      <main className="min-h-screen relative z-10 pt-20 pb-12">
+      <LastPlayed />
+
+      <main className="min-h-screen relative z-10 pt-20 pb-24">
         <div className="fixed inset-0 pointer-events-none z-20 scanlines opacity-5" />
 
-        <div className="max-w-[800px] mx-auto px-4 md:px-6 space-y-16">
+        <div className="max-w-[800px] mx-auto px-4 md:px-6 space-y-8">
+
+          {/* Bio */}
           <div
-            className={`space-y-3 transition-all duration-1000 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+            className={`space-y-2 transition-all duration-1000 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
           >
             <div className="font-mono text-3xl md:text-4xl">
               <span className="text-[#abb2bf]">$ ali tayeb</span>
@@ -45,9 +42,9 @@ export default function HomePage() {
                 ▊
               </span>
             </div>
-
-            <div className="space-y-1 font-mono text-sm md:text-base">
-              <p className="text-[#5c6370]">cs @ cmu. interested in systems, and dev tools. i like sports,{" "}
+            <div className="font-mono text-sm text-[#5c6370] leading-relaxed space-y-1">
+              <p>
+                cs @ cmu. interested in systems, and dev tools. i like sports,{" "}
                 <a
                   href="https://www.worldcubeassociation.org/persons/2024TAYE01"
                   target="_blank"
@@ -65,53 +62,51 @@ export default function HomePage() {
                 >
                   music
                 </a>
-                {" "}too! currently exploring cuda. </p>
-              <br />
-              <p className="text-[#5c6370]">
-                feel free to reach out at{" "}
+                {" "}too! currently exploring cuda.
+              </p>
+              <p>
+                reach out at{" "}
                 <a
                   href="mailto:ali.moh.islam.1@gmail.com"
                   className="text-[#98c379] hover:text-[#61afef] transition-colors"
                 >
                   ali.moh.islam.1@gmail.com
                 </a>
-                
               </p>
             </div>
           </div>
 
+          {/* Experiences + Projects grid */}
           <div
-            className={`grid md:grid-cols-2 gap-12 transition-all duration-1000 delay-200 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+            className={`grid md:grid-cols-2 gap-8 mt-6 transition-all duration-1000 delay-200 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
           >
-            <section id="work" className="space-y-6">
-              <h2 className="font-mono text-2xl text-[#98c379] flex items-center gap-2">
+            {/* Experiences */}
+            <section id="work" className="space-y-3">
+              <h2 className="font-mono text-xl text-[#98c379] flex items-center gap-1.5">
                 <span className="text-[#61afef]">~/</span>experiences
               </h2>
-              <div className="space-y-4">
-                {workExperiences.map((work, index) => (
+              <div className="space-y-2">
+                {workExperiences.map((work) => (
                   <div
                     key={work.id}
-                    className="border border-dashed border-[#262626] rounded-lg p-6 bg-[#0a0a0a] hover:border-[#98c379]/20 transition-colors"
+                    className="border border-dashed border-[#262626] rounded-lg p-3.5 bg-[#0a0a0a] hover:border-[#98c379]/20 transition-colors"
                   >
-                    <div className="space-y-2">
-                      <div className="flex items-baseline gap-3 flex-wrap">
-                        <div className="font-mono text-sm">
-                          <span className="text-[#abb2bf]">{work.role},</span>{" "}
-                          <span className="text-[#98c379] underline decoration-[#98c379]/30 hover:decoration-[#98c379]/60 underline-offset-2 transition-colors">
-                            {work.company}
-                          </span>
+                    <div className="space-y-1.5">
+                      {/* Role, Company — period on right */}
+                      <div className="flex items-baseline justify-between gap-2">
+                        <div className="flex items-baseline gap-1.5 min-w-0 flex-wrap">
+                          <span className="font-mono text-xs text-[#abb2bf]">{work.role},</span>
+                          <span className="font-mono text-xs text-[#98c379]">{work.company}</span>
                         </div>
-                        <div className="font-mono text-xs text-[#5c6370]">
-                          {work.period}
-                        </div>
+                        <span className="font-mono text-[10px] text-[#3e4451] shrink-0 whitespace-nowrap">{work.period}</span>
                       </div>
-                      <p className="font-mono text-xs text-[#5c6370] leading-relaxed max-w-none">{work.story}</p>
+                      <p className="font-mono text-[11px] text-[#5c6370] leading-relaxed">{work.story}</p>
                       {work.tags && work.tags.length > 0 && (
-                        <div className="flex flex-wrap gap-2 pt-1">
-                          {work.tags.map((tag, tagIdx) => (
+                        <div className="flex flex-wrap gap-1">
+                          {work.tags.map((tag, i) => (
                             <span
-                              key={tagIdx}
-                              className="text-xs font-mono text-[#5c6370] border border-[#262626] px-2 py-0.5 rounded"
+                              key={i}
+                              className="text-[10px] font-mono text-[#3e4451] border border-[#1e1e1e] px-1.5 rounded"
                             >
                               {tag}
                             </span>
@@ -124,40 +119,73 @@ export default function HomePage() {
               </div>
             </section>
 
-            <section id="projects" className="space-y-6">
-              <h2 className="font-mono text-2xl text-[#98c379] flex items-center gap-2">
+            {/* Projects */}
+            <section id="projects" className="space-y-3">
+              <h2 className="font-mono text-xl text-[#98c379] flex items-center gap-1.5">
                 <span className="text-[#61afef]">~/</span>projects
               </h2>
-              <div className="space-y-4">
-                {projects.map((project, index) => (
+              <div className="space-y-2">
+                {projects.map((project) => (
                   <div
                     key={project.id}
-                    className="border border-dashed border-[#262626] rounded-lg p-6 bg-[#0a0a0a] hover:border-[#98c379]/20 transition-colors"
+                    className="border border-dashed border-[#262626] rounded-lg p-3.5 bg-[#0a0a0a] hover:border-[#98c379]/20 transition-colors"
                   >
-                    <div className="space-y-2">
-                      <div className="flex items-baseline gap-3">
+                    <div className="space-y-1.5">
+                      <div className="flex items-center justify-between gap-2">
+                        {/* Name links to demo site or github */}
                         {project.link ? (
                           <a
                             href={project.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="font-mono text-sm text-[#98c379] underline decoration-[#98c379]/30 hover:decoration-[#98c379]/60 hover:text-[#61afef] underline-offset-2 transition-colors"
+                            className="font-mono text-xs text-[#98c379] hover:text-[#61afef] transition-colors"
+                          >
+                            {project.name}
+                          </a>
+                        ) : project.github ? (
+                          <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-mono text-xs text-[#98c379] hover:text-[#61afef] transition-colors"
                           >
                             {project.name}
                           </a>
                         ) : (
-                          <h3 className="font-mono text-sm text-[#98c379] underline decoration-[#98c379]/30 hover:decoration-[#98c379]/60 underline-offset-2 transition-colors">
-                            {project.name}
-                          </h3>
+                          <span className="font-mono text-xs text-[#98c379]">{project.name}</span>
                         )}
+
+                        {/* gh / post links */}
+                        <div className="flex items-center gap-2 shrink-0">
+                          {project.github && (
+                            <a
+                              href={project.github}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="font-mono text-[10px] text-[#3e4451] hover:text-[#abb2bf] transition-colors"
+                            >
+                              gh
+                            </a>
+                          )}
+                          {project.blog && (
+                            <a
+                              href={project.blog}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="font-mono text-[10px] text-[#3e4451] hover:text-[#abb2bf] transition-colors"
+                            >
+                              post
+                            </a>
+                          )}
+                        </div>
                       </div>
-                      <p className="font-mono text-xs text-[#5c6370] leading-relaxed">{project.description}</p>
+                      <p className="font-mono text-[11px] text-[#5c6370] leading-relaxed">{project.description}</p>
                       {project.tech && project.tech.length > 0 && (
-                        <div className="flex flex-wrap gap-2 pt-1">
-                          {project.tech.map((tech, techIdx) => (
+                        <div className="flex flex-wrap gap-1">
+                          {project.tech.map((tech, i) => (
                             <span
-                              key={techIdx}
-                              className="text-xs font-mono text-[#5c6370] border border-[#262626] px-2 py-0.5 rounded"
+                              key={i}
+                              className="text-[10px] font-mono text-[#3e4451] border border-[#1e1e1e] px-1.5 rounded"
                             >
                               {tech}
                             </span>
@@ -168,157 +196,28 @@ export default function HomePage() {
                   </div>
                 ))}
               </div>
+              <a
+                href="https://github.com/alityb"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-xs text-[#5c6370] hover:text-[#98c379] transition-colors inline-block"
+              >
+                show all →
+              </a>
             </section>
           </div>
 
-          <section
-            id="publications"
-            className={`space-y-6 transition-all duration-1000 delay-400 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
-          >
-            <h2 className="font-mono text-2xl text-[#98c379] glow-text flex items-center gap-2">
-              <span className="text-[#61afef]">~/</span>publications
-            </h2>
-            <div className="space-y-4">
-              {publications.map((pub, index) => {
-                // Make "Ali M. Tayeb" bold in authors
-                const authorParts = pub.authors.split(", ").map((author, idx) => {
-                  const isBold = author.includes("Ali M. Tayeb") || author.includes("Ali M Tayeb")
-                  return (
-                    <span key={idx}>
-                      {idx > 0 && ", "}
-                      {isBold ? (
-                        <strong className="font-bold">{author}</strong>
-                      ) : (
-                        author
-                      )}
-                    </span>
-                  )
-                })
-
-                return (
-                  <div
-                    key={pub.id}
-                    className="border border-dashed border-[#262626] rounded-lg p-6 bg-[#0a0a0a] hover:border-[#98c379]/20 transition-colors"
-                  >
-                    <div className="space-y-2">
-                      <h3 className="font-mono text-sm text-[#98c379] underline decoration-[#98c379]/30 hover:decoration-[#98c379]/60 underline-offset-2 transition-colors">
-                        {pub.title}
-                      </h3>
-                      <div className="font-mono text-xs text-[#5c6370] space-y-1">
-                        <p>{authorParts}</p>
-                        <p className="text-[#61afef]">
-                          {pub.venue}, {pub.year}
-                        </p>
-                      </div>
-                      {pub.link && (
-                        <a
-                          href={pub.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-[#98c379] text-xs hover:text-[#61afef] transition-colors inline-flex items-center gap-1 group"
-                        >
-                          read paper
-                          <span className="group-hover:translate-x-1 transition-transform">→</span>
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
-          </section>
-
+          {/* Blog */}
           <section
             id="blog"
-            className={`space-y-6 transition-all duration-1000 delay-450 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+            className={`space-y-4 transition-all duration-1000 delay-400 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
           >
-            <h2 className="font-mono text-2xl text-[#98c379] glow-text flex items-center gap-2">
+            <h2 className="font-mono text-xl text-[#98c379] glow-text flex items-center gap-1.5">
               <span className="text-[#61afef]">~/</span>blog
             </h2>
             <SubstackBlog />
           </section>
 
-          <section
-            id="contact"
-            className={`space-y-6 transition-all duration-1000 delay-500 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
-          >
-            <h2 className="font-mono text-2xl text-[#98c379] glow-text flex items-center gap-2">
-              <span className="text-[#61afef]">~/</span>contact
-            </h2>
-            <div className="border border-dashed border-[#262626] rounded-lg p-6 bg-[#0a0a0a] hover:border-[#98c379]/20 transition-colors">
-              <form action={formAction} className="space-y-4">
-                <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm font-mono text-[#abb2bf]">
-                    Full Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    required
-                    maxLength={500}
-                    className="w-full px-4 py-2 bg-[#282c34] border border-dashed border-[#5c6370] rounded font-mono text-sm text-[#abb2bf] focus:border-solid focus:border-[#5c6370] focus:outline-none transition-all"
-                    placeholder="John Doe"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-mono text-[#abb2bf]">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    maxLength={500}
-                    className="w-full px-4 py-2 bg-[#282c34] border border-dashed border-[#5c6370] rounded font-mono text-sm text-[#abb2bf] focus:border-solid focus:border-[#5c6370] focus:outline-none transition-all"
-                    placeholder="johndoe@example.com"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label htmlFor="subject" className="text-sm font-mono text-[#abb2bf]">
-                    Subject
-                  </label>
-                  <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    required
-                    maxLength={250}
-                    className="w-full px-4 py-2 bg-[#282c34] border border-dashed border-[#5c6370] rounded font-mono text-sm text-[#abb2bf] focus:border-solid focus:border-[#5c6370] focus:outline-none transition-all"
-                    placeholder="Your subject must be 250 characters or fewer."
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label htmlFor="message" className="text-sm font-mono text-[#abb2bf]">
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    required
-                    maxLength={2500}
-                    rows={5}
-                    className="w-full px-4 py-2 bg-[#282c34] border border-dashed border-[#5c6370] rounded font-mono text-sm text-[#abb2bf] focus:border-solid focus:border-[#5c6370] focus:outline-none transition-all resize-none"
-                    placeholder="Your message must be 2500 characters or fewer."
-                  />
-                </div>
-                {state?.error && (
-                  <div className="text-xs font-mono text-red-400">{state.error}</div>
-                )}
-                {state?.data && (
-                  <div className="text-xs font-mono text-[#98c379]">Message sent successfully!</div>
-                )}
-                <button
-                  type="submit"
-                  disabled={isPending}
-                  className="w-full px-6 py-3 bg-[#cccccc] text-[#1a1a1a] font-mono text-sm rounded hover:bg-[#d0d0d0] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isPending ? "sending..." : "Submit"}
-                </button>
-              </form>
-            </div>
-          </section>
         </div>
       </main>
     </>

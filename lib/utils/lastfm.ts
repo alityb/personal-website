@@ -1,37 +1,31 @@
-import type { Track } from "../types/lastfm"
+export interface RecentTrackResult {
+  name: string
+  artist: string
+  url: string
+  nowPlaying: boolean
+  image: string
+  dateUts: string | null
+}
 
-export async function fetchRecentTracks(): Promise<Track | null> {
+export async function fetchRecentTracks(): Promise<RecentTrackResult | null> {
   try {
     const response = await fetch("/api/lastfm")
-    
-    if (!response.ok) {
-      throw new Error("Failed to fetch recent tracks")
-    }
+
+    if (!response.ok) throw new Error("Failed to fetch recent tracks")
 
     const data = await response.json()
-    
-    if (data.error) {
-      throw new Error(data.error)
-    }
 
-    // Return the track data in a format compatible with our component
-    // Check if it's a placeholder (no credentials) or actual track
+    if (data.error) throw new Error(data.error)
+
     if (data.name && data.name !== "—" && data.name !== "song name") {
       return {
         name: data.name,
-        artist: {
-          "#text": data.artist,
-          mbid: "",
-        },
+        artist: data.artist,
         url: data.url || "",
-        streamable: "",
-        image: [],
-        mbid: "",
-        album: {
-          mbid: "",
-          "#text": "",
-        },
-      } as Track
+        nowPlaying: data.nowPlaying === true,
+        image: data.image || "",
+        dateUts: data.dateUts || null,
+      }
     }
 
     return null
@@ -40,4 +34,3 @@ export async function fetchRecentTracks(): Promise<Track | null> {
     return null
   }
 }
-
