@@ -77,6 +77,14 @@ export const workExperiences: WorkExperience[] = [
 
 export const projects: Project[] = [
   {
+    id: "rlprof",
+    name: "rlprof",
+    description: "profiler for vLLM inference; profile rollout workloads in seconds.",
+    tech: ["C++20", "Python", "vLLM", "Nsight Systems"],
+    outcomes: [],
+    github: "https://github.com/alityb/rlprof",
+  },
+  {
     id: "kerndiff",
     name: "kerndiff",
     description:
@@ -105,20 +113,6 @@ export const projects: Project[] = [
     tech: ["C++", "CLI", "POSIX", "std::regex"],
     outcomes: ["instant codebase sharing", "LLM-friendly formatting", "smart file filtering", "cross-platform support"],
     github: "https://github.com/alityb/synccli",
-  },
-  {
-    id: "smartfilecmd",
-    name: "smartfilecmd",
-    description:
-      "natural language file manager for the terminal. built to fix my messy downloads folder.",
-    tech: ["Python", "C++", "CLI", "JSON"],
-    outcomes: [
-      "intuitive file operations",
-      "natural language processing",
-      "terminal-native experience",
-      "batch operations support",
-    ],
-    github: "https://github.com/alityb/smartfilecmd",
   },
 ]
 
