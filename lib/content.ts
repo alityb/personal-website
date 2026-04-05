@@ -77,12 +77,12 @@ export const workExperiences: WorkExperience[] = [
 
 export const projects: Project[] = [
   {
-    id: "rlprof",
-    name: "rlprof",
-    description: "profiler for vLLM inference; profile rollout workloads in seconds.",
-    tech: ["C++20", "Python", "vLLM", "Nsight Systems"],
+    id: "hotpath",
+    name: "hotpath",
+    description: "profile LLM inference",
+    tech: ["C++20", "Python", "vLLM", "SGLang", "Nsight Systems"],
     outcomes: [],
-    github: "https://github.com/alityb/rlprof",
+    github: "https://github.com/alityb/hotpath",
   },
   {
     id: "kerndiff",
