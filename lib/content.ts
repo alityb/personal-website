@@ -83,6 +83,7 @@ export const projects: Project[] = [
     tech: ["C++20", "Python", "vLLM", "SGLang", "Nsight Systems"],
     outcomes: [],
     github: "https://github.com/alityb/hotpath",
+    blog: "https://tperm.xyz/hotpath/",
   },
   {
     id: "kerndiff",
