@@ -1,26 +1,25 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Geist_Mono } from "next/font/google"
-import { Analytics } from "@vercel/analytics/next"
-import "./globals.css"
+import { Analytics } from '@vercel/analytics/next'
+import type { Metadata, Viewport } from 'next'
+import { Geist, Geist_Mono } from 'next/font/google'
+import './globals.css'
 
-const geistMono = Geist_Mono({ subsets: ["latin"] })
+const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] })
+const geistMono = Geist_Mono({
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
+})
 
 export const metadata: Metadata = {
-  title: "ali tayeb",
-  description: "cs @ cmu. interested in systems, and dev tools.",
-  openGraph: {
-    title: "ali tayeb",
-    description: "cs @ cmu. interested in systems, and dev tools.",
-    url: "https://amtayeb.dev",
-    siteName: "ali tayeb",
-    type: "website",
-  },
-  twitter: {
-    card: "summary",
-    title: "ali tayeb",
-    description: "cs @ cmu. interested in systems, and dev tools.",
-  },
+  title: 'Ali Tayeb',
+  description: 'Inference engineer at Overshoot AI. Systems, curiosity, and good music.',
+}
+
+export const viewport: Viewport = {
+  colorScheme: 'light dark',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: 'white' },
+    { media: '(prefers-color-scheme: dark)', color: 'black' },
+  ],
 }
 
 export default function RootLayout({
@@ -29,10 +28,13 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistMono.className} antialiased`}>
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable} bg-background`}
+    >
+      <body className="font-mono antialiased">
         {children}
-        <Analytics />
+        {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
   )
