@@ -1,7 +1,8 @@
 "use client"
 
 import { useEffect, useState, useCallback } from "react"
-import { useRouter, usePathname } from "next/navigation"
+
+export type Section = "home" | "projects" | "experience" | "blog"
 
 const contacts = [
   { label: "email", value: "ali.moh.islam.1@gmail.com", href: "", copy: true },
@@ -10,20 +11,20 @@ const contacts = [
   { label: "linkedin", value: "amtayeb", href: "https://linkedin.com/in/amtayeb" },
 ]
 
-export function CommandBar() {
-  const router = useRouter()
-  const pathname = usePathname()
+export function CommandBar({
+  section,
+  setSection,
+}: {
+  section: Section
+  setSection: (s: Section) => void
+}) {
   const [contactOpen, setContactOpen] = useState(false)
   const [contactIndex, setContactIndex] = useState(0)
   const [copied, setCopied] = useState(false)
 
-  const isHome = pathname === "/"
+  const isHome = section === "home"
 
   const closeContact = useCallback(() => setContactOpen(false), [])
-
-  const go = useCallback((path: string) => {
-    router.push(path)
-  }, [router])
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -59,18 +60,18 @@ export function CommandBar() {
 
       if (!isHome && (e.key === "Escape" || e.key === "q")) {
         e.preventDefault()
-        router.back()
+        setSection("home")
         return
       }
 
       switch (e.key) {
         case "p":
           e.preventDefault()
-          go("/projects")
+          setSection("projects")
           break
         case "e":
           e.preventDefault()
-          go("/experience")
+          setSection("experience")
           break
         case "c":
           e.preventDefault()
@@ -79,29 +80,29 @@ export function CommandBar() {
           break
         case "b":
           e.preventDefault()
-          go("/blog")
+          setSection("blog")
           break
       }
     }
 
     window.addEventListener("keydown", onKey)
     return () => window.removeEventListener("keydown", onKey)
-  }, [contactOpen, contactIndex, closeContact, isHome, go])
+  }, [contactOpen, contactIndex, closeContact, isHome, setSection])
 
   return (
     <>
       <nav className="flex items-center gap-4 font-mono text-xs text-muted-foreground">
         {!isHome && (
-          <button onClick={() => router.back()} className="mr-2 flex items-center gap-1.5 transition-colors hover:text-foreground">
+          <button onClick={() => setSection("home")} className="mr-2 flex items-center gap-1.5 transition-colors hover:text-foreground">
             <kbd className="rounded border border-border bg-card px-1.5 py-0.5 text-[10px]">esc</kbd>
             <span>back</span>
           </button>
         )}
-        <button onClick={() => go("/projects")} className="flex items-center gap-1.5 transition-colors hover:text-foreground">
+        <button onClick={() => setSection("projects")} className="flex items-center gap-1.5 transition-colors hover:text-foreground">
           <kbd className="rounded border border-border bg-card px-1.5 py-0.5 text-[10px]">p</kbd>
           <span>projects</span>
         </button>
-        <button onClick={() => go("/experience")} className="flex items-center gap-1.5 transition-colors hover:text-foreground">
+        <button onClick={() => setSection("experience")} className="flex items-center gap-1.5 transition-colors hover:text-foreground">
           <kbd className="rounded border border-border bg-card px-1.5 py-0.5 text-[10px]">e</kbd>
           <span>experience</span>
         </button>
@@ -109,7 +110,7 @@ export function CommandBar() {
           <kbd className="rounded border border-border bg-card px-1.5 py-0.5 text-[10px]">c</kbd>
           <span>contact</span>
         </button>
-        <button onClick={() => go("/blog")} className="flex items-center gap-1.5 transition-colors hover:text-foreground">
+        <button onClick={() => setSection("blog")} className="flex items-center gap-1.5 transition-colors hover:text-foreground">
           <kbd className="rounded border border-border bg-card px-1.5 py-0.5 text-[10px]">b</kbd>
           <span>blog</span>
         </button>
