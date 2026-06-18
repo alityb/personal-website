@@ -67,9 +67,9 @@ export default async function Page() {
           </p>
 
           <p className="text-muted-foreground">
-            I love making systems go faster. I tend to keep poking at a problem
-            long after it&apos;s reasonable to stop, just to see what&apos;s
-            underneath. Hopefully it adds up to some good stories down the line.
+            I like making systems faster. I tend to bite off more than I
+            can chew chasing performance, and I always end up in a place I
+            didn&apos;t expect.
           </p>
 
           <p className="text-muted-foreground">
@@ -86,8 +86,8 @@ export default async function Page() {
           </p>
 
           <p className="text-muted-foreground">
-            If any of this sounds interesting (or not), let&apos;s talk! I want
-            to hear what you&apos;re thinking about.
+            If any of this sounds interesting, let&apos;s talk! I want to hear
+            what you&apos;re thinking about.
           </p>
 
           <hr className="my-2 max-w-xs border-border" />
