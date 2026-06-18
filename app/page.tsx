@@ -67,9 +67,9 @@ export default async function Page() {
           </p>
 
           <p className="text-muted-foreground">
-            I like making systems faster — tend to bite off more than I
-            can chew chasing performance, and always end up somewhere I
-            didn&apos;t expect — hopefully with a good story to tell.
+            My interests develop as tech develops, but it almost always
+            boils down to making systems faster. Every bottleneck is a rabbit
+            hole with a story worth telling.
           </p>
 
           <p className="text-muted-foreground">
