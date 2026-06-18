@@ -1,5 +1,6 @@
 import { VinylRecord } from "@/components/vinyl-record"
 import { NowPlaying } from "@/components/now-playing"
+import { CommandBar } from "@/components/command-bar"
 
 async function getTrack() {
   const apiKey = process.env.LASTFM_API_KEY
@@ -37,20 +38,32 @@ export default async function Page() {
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-background text-foreground">
-      <div className="absolute inset-y-0 right-0 z-20 hidden w-[55%] lg:block">
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-20 hidden w-[55%] lg:block">
         <VinylRecord side="right" className="min-h-screen" initialTrack={initialTrack} />
       </div>
 
       <NowPlaying initialTrack={initialTrack} />
 
-      <div className="pointer-events-none relative z-10 mx-auto flex min-h-screen max-w-3xl flex-col px-6 py-20 sm:px-10">
-        <article className="pointer-events-auto flex max-w-xl flex-1 flex-col justify-center gap-7 text-pretty leading-relaxed">
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-3xl flex-col px-6 py-20 sm:px-10">
+        <div className="mb-8">
+          <CommandBar />
+        </div>
+
+        <article className="flex max-w-xl flex-1 flex-col justify-center gap-7 text-pretty leading-relaxed">
           <h1 className="text-base text-foreground">Hey, I&apos;m Ali!</h1>
 
           <p className="text-muted-foreground">
-            I grew up between Egypt and Saudi Arabia, currently in SF working @
-            Overshoot AI on inference for VLMs. Before that, I was a big sports
-            analytics nerd.
+            I grew up between Egypt and Saudi Arabia, currently in SF working @{" "}
+            <a
+              href="https://www.overshoot.ai/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border-b border-foreground/30 text-foreground no-underline transition-colors hover:border-foreground hover:text-foreground"
+            >
+              Overshoot AI
+            </a>{" "}
+            on inference for VLMs. Other than that, I study CS @ CMU and
+            I am a big sports analytics nerd.
           </p>
 
           <p className="text-muted-foreground">
@@ -60,8 +73,16 @@ export default async function Page() {
           </p>
 
           <p className="text-muted-foreground">
-            On the side, I&apos;m a speedcuber, Pokémon fan, and lifelong
-            Borussia Dortmund fan.
+            On the side, I&apos;m a{" "}
+            <a
+              href="https://www.worldcubeassociation.org/persons/2024TAYE01"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border-b border-foreground/30 text-foreground no-underline transition-colors hover:border-foreground hover:text-foreground"
+            >
+              speedcuber
+            </a>
+            , Pokémon fan, and lifelong Borussia Dortmund supporter.
           </p>
 
           <p className="text-muted-foreground">
@@ -84,7 +105,7 @@ export default async function Page() {
           </blockquote>
         </article>
 
-        <nav className="pointer-events-auto mt-12 flex items-center gap-5 text-muted-foreground">
+        <nav className="mt-12 flex items-center gap-5 text-muted-foreground">
           <a
             href="mailto:ali.moh.islam.1@gmail.com"
             aria-label="Email"

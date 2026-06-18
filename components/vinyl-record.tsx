@@ -71,7 +71,7 @@ export function VinylRecord({
             type="button"
             onClick={togglePlaying}
             aria-label={playing ? "Pause record" : "Play record"}
-            className="block cursor-pointer rounded-full outline-none"
+            className="pointer-events-auto block cursor-pointer rounded-full outline-none"
           >
             <div
               className="relative aspect-square w-[14rem] select-none sm:w-[17rem] md:w-[20rem] lg:w-[24rem] animate-vinyl-spin"
