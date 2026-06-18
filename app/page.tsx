@@ -63,13 +63,14 @@ export default async function Page() {
               Overshoot AI
             </a>{" "}
             on inference for VLMs. Other than that, I study CS @ CMU and
-            I am a big sports analytics nerd.
+            am a big sports analytics nerd.
           </p>
 
           <p className="text-muted-foreground">
-            I like making systems faster. I tend to bite off more than I
-            can chew chasing performance, and I always end up in a place I
-            didn&apos;t expect.
+            I like making systems faster — tend to bite off more than I
+            can chew chasing performance, and always end up somewhere I
+            didn&apos;t expect. Hopefully it all ends with a good story to
+            tell.
           </p>
 
           <p className="text-muted-foreground">
