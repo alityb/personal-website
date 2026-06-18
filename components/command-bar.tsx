@@ -59,7 +59,7 @@ export function CommandBar() {
 
       if (!isHome && (e.key === "Escape" || e.key === "q")) {
         e.preventDefault()
-        go("/")
+        router.back()
         return
       }
 
@@ -92,7 +92,7 @@ export function CommandBar() {
     <>
       <nav className="flex items-center gap-4 font-mono text-xs text-muted-foreground">
         {!isHome && (
-          <button onClick={() => go("/")} className="mr-2 flex items-center gap-1.5 transition-colors hover:text-foreground">
+          <button onClick={() => router.back()} className="mr-2 flex items-center gap-1.5 transition-colors hover:text-foreground">
             <kbd className="rounded border border-border bg-card px-1.5 py-0.5 text-[10px]">esc</kbd>
             <span>back</span>
           </button>
