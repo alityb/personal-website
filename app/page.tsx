@@ -69,8 +69,7 @@ export default async function Page() {
           <p className="text-muted-foreground">
             I like making systems faster — tend to bite off more than I
             can chew chasing performance, and always end up somewhere I
-            didn&apos;t expect. Hopefully it all ends with a good story to
-            tell.
+            didn&apos;t expect — hopefully with a good story to tell.
           </p>
 
           <p className="text-muted-foreground">
