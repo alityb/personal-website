@@ -47,30 +47,40 @@ export default async function Page() {
       <div className="relative z-10 mx-auto flex min-h-screen max-w-3xl flex-col px-6 py-20 sm:px-10">
         <SiteShell>
           <article className="flex max-w-xl flex-1 flex-col justify-center gap-7 text-pretty leading-relaxed">
-            <h1 className="text-base text-foreground">Hey, I&apos;m Ali!</h1>
+            <h1 className="text-base text-foreground">Hey, I am Ali!</h1>
 
             <p className="text-muted-foreground">
-              I grew up between Egypt and Saudi Arabia, currently in SF working @{" "}
+              Born and raised between Egypt and Saudi Arabia, I study CS @ CMU
+              and am currently working on inference @{" "}
               <a
                 href="https://www.overshoot.ai/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="border-b border-foreground/30 text-foreground no-underline transition-colors hover:border-foreground hover:text-foreground"
               >
-                Overshoot AI
+                Overshoot (YC W26)
+              </a>
+              .
+            </p>
+
+            <p className="text-muted-foreground">
+              I view code, writing, photos, and anything I produce as a way to
+              hold onto what matters to me. Tech moves fast, so my interests
+              shift week to week, but my goal will always be to work on problems
+              that bring out a childlike obsession with the smartest people.
+            </p>
+
+            <p className="text-muted-foreground">
+              On the side, I am a huge{" "}
+              <a
+                href="https://www.last.fm/user/amtayeb"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border-b border-foreground/30 text-foreground no-underline transition-colors hover:border-foreground hover:text-foreground"
+              >
+                music
               </a>{" "}
-              on inference for VLMs. Other than that, I study CS @ CMU and
-              am a big sports analytics nerd.
-            </p>
-
-            <p className="text-muted-foreground">
-              My interests develop as tech develops, but it almost always
-              boils down to making systems faster. Every bottleneck is a rabbit
-              hole with a story worth telling.
-            </p>
-
-            <p className="text-muted-foreground">
-              On the side, I&apos;m a{" "}
+              fan,{" "}
               <a
                 href="https://www.worldcubeassociation.org/persons/2024TAYE01"
                 target="_blank"
@@ -79,12 +89,14 @@ export default async function Page() {
               >
                 speedcuber
               </a>
-              , Pokémon fan, and lifelong Borussia Dortmund supporter.
+              , and a lifelong Dortmund supporter!
             </p>
 
             <p className="text-muted-foreground">
-              If any of this sounds interesting, let&apos;s talk! I want to hear
-              what you&apos;re thinking about.
+              Life&apos;s short, so if any of this sounds interesting, let&apos;s
+              talk! Reach me at{" "}
+              <code className="text-foreground">ali.moh.islam.1 [at] gmail [dot] com</code>
+              .
             </p>
 
             <hr className="my-2 max-w-xs border-border" />
@@ -103,16 +115,6 @@ export default async function Page() {
           </article>
 
           <nav className="mt-12 flex items-center gap-5 text-muted-foreground">
-            <a
-              href="mailto:ali.moh.islam.1@gmail.com"
-              aria-label="Email"
-              className="transition-colors hover:text-foreground"
-            >
-              <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect width="20" height="16" x="2" y="4" rx="2" />
-                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-              </svg>
-            </a>
             <a
               href="https://x.com/amtayb"
               target="_blank"

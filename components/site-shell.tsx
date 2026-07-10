@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { CommandBar, type Section } from "./command-bar"
+import { GithubActivity } from "./github-activity"
 
 const projects = [
   {
@@ -46,7 +47,7 @@ const experiences = [
     role: "Software Engineer",
     dates: "Aug '24 - Jul '25",
     description:
-      "built visualization and automation tools for football analytics. developed data pipelines and interactive dashboards for performance analysis.",
+      "automation and visualization tools for soccer.",
     tech: "Python, TypeScript, React, Docker, Redis",
   },
   {
@@ -54,14 +55,15 @@ const experiences = [
     role: "Research Assistant",
     dates: "Jul '23 - Sep '24",
     description:
-      "convinced my mentor to pursue an ML project for the first time. researched deep learning applications in polymers.",
+      "convinced my PI to pursue an ML project for the first time. researched deep learning applications in polymers.",
+    link: "https://doi.org/10.1016/j.jece.2025.119315",
     tech: "Machine Learning, Python, PyTorch",
   },
   {
     company: "BAS",
     role: "Research Intern",
     dates: "Sep '23 - Oct '23",
-    description: "worked on algorithm optimization.",
+    description: "algorithm optimization.",
     tech: "Algorithms, C++, Optimization",
   },
 ]
@@ -105,13 +107,14 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
               </div>
             </div>
           ))}
+          <GithubActivity />
           <a
             href="https://github.com/alityb"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-2 inline-block font-mono text-[11px] text-muted-foreground/40 transition-colors hover:text-muted-foreground"
+            className="inline-block font-mono text-[11px] text-muted-foreground/40 transition-colors hover:text-muted-foreground"
           >
-            + a couple others in archive
+            + more in archive
           </a>
         </div>
       )}
@@ -127,6 +130,11 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                 <span className="shrink-0 font-mono text-[11px] text-muted-foreground/70">{exp.dates}</span>
               </div>
               <p className="font-mono text-xs leading-relaxed text-muted-foreground">{exp.description}</p>
+              {exp.link && (
+                <a href={exp.link} target="_blank" rel="noopener noreferrer" className="font-mono text-[11px] text-muted-foreground underline transition-colors hover:text-foreground">
+                  paper
+                </a>
+              )}
               {exp.tech && (
                 <p className="font-mono text-[11px] text-muted-foreground/50">{exp.tech}</p>
               )}
