@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server"
+import { unstable_cache } from "next/cache"
 
 export const dynamic = "force-dynamic"
 
@@ -22,7 +23,9 @@ function decodeEntities(value: string) {
 
 async function getLastPublicCommit(username: string): Promise<LastCommit | null> {
   try {
-    const timelineRes = await fetch(`https://github.com/${username}.atom`)
+    const timelineRes = await fetch(`https://github.com/${username}.atom`, {
+      next: { revalidate: 300 },
+    })
     if (!timelineRes.ok) return null
 
     const timeline = await timelineRes.text()
@@ -42,6 +45,7 @@ async function getLastPublicCommit(username: string): Promise<LastCommit | null>
     const repo = `${username}/${repoName}`
     const commitsRes = await fetch(
       `https://github.com/${repo}/commits/${encodeURIComponent(branch)}.atom`,
+      { next: { revalidate: 300 } },
     )
 
     if (commitsRes.ok) {
@@ -81,10 +85,16 @@ async function getLastPublicCommit(username: string): Promise<LastCommit | null>
   }
 }
 
+const getCachedLastPublicCommit = unstable_cache(
+  () => getLastPublicCommit("alityb"),
+  ["github-current-work"],
+  { revalidate: 300 },
+)
+
 async function getLastCommit(username: string): Promise<LastCommit | null> {
   try {
     const token = process.env.GITHUB_TOKEN
-    if (!token) return getLastPublicCommit(username)
+    if (!token) return getCachedLastPublicCommit()
 
     const headers = {
       Accept: "application/vnd.github+json",
@@ -93,7 +103,7 @@ async function getLastCommit(username: string): Promise<LastCommit | null> {
     const eventsRes = await fetch(`https://api.github.com/users/${username}/events?per_page=10`, {
       headers,
     })
-    if (!eventsRes.ok) return getLastPublicCommit(username)
+    if (!eventsRes.ok) return getCachedLastPublicCommit()
     const events = await eventsRes.json()
 
     for (const event of events) {
@@ -163,9 +173,9 @@ async function getLastCommit(username: string): Promise<LastCommit | null> {
         }
       }
     }
-    return getLastPublicCommit(username)
+    return getCachedLastPublicCommit()
   } catch {
-    return getLastPublicCommit(username)
+    return getCachedLastPublicCommit()
   }
 }
 
@@ -173,5 +183,14 @@ export async function GET() {
   const username = "alityb"
   const lastCommit = await getLastCommit(username)
 
-  return NextResponse.json({ lastCommit })
+  return NextResponse.json(
+    { lastCommit },
+    {
+      headers: {
+        "Cache-Control": lastCommit?.private
+          ? "private, no-store"
+          : "public, max-age=60, s-maxage=300, stale-while-revalidate=86400",
+      },
+    },
+  )
 }

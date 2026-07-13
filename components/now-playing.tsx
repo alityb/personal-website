@@ -17,12 +17,15 @@ export function NowPlaying({ initialTrack }: { initialTrack?: Track | null }) {
     async function fetchTrack() {
       try {
         const res = await fetch("/api/lastfm")
+        if (!res.ok) return
         const data = await res.json()
+        if (!data?.name) return
         setTrack(data)
       } catch {
         // keep existing
       }
     }
+    fetchTrack()
     const interval = setInterval(fetchTrack, 30000)
     return () => clearInterval(interval)
   }, [])

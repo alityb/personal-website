@@ -31,12 +31,18 @@ export function VinylRecord({
     async function fetchTrack() {
       try {
         const res = await fetch("/api/lastfm")
+        if (!res.ok) return
         const data = await res.json()
-        setTrack(data)
+        if (!data?.name) return
+        setTrack((current) => ({
+          ...data,
+          image: data.image ?? current?.image ?? null,
+        }))
       } catch {
         // keep existing track data on error
       }
     }
+    fetchTrack()
     const interval = setInterval(fetchTrack, 30000)
     return () => clearInterval(interval)
   }, [])

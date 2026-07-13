@@ -11,6 +11,8 @@ interface LastCommit {
   branch: string
 }
 
+const CACHE_KEY = "github-current-work"
+
 function timeAgo(dateStr: string) {
   const date = new Date(dateStr)
   const now = new Date()
@@ -32,10 +34,23 @@ export function GithubActivity() {
   const [lastCommit, setLastCommit] = useState<LastCommit | null>(null)
 
   useEffect(() => {
+    try {
+      const cached = window.localStorage.getItem(CACHE_KEY)
+      if (cached) setLastCommit(JSON.parse(cached))
+    } catch {
+      // Shared HTTP cache remains the fallback when storage is unavailable.
+    }
+
     fetch("/api/github")
       .then((r) => r.json())
       .then((data) => {
-        setLastCommit(data.lastCommit || null)
+        if (!data.lastCommit) return
+        setLastCommit(data.lastCommit)
+        try {
+          window.localStorage.setItem(CACHE_KEY, JSON.stringify(data.lastCommit))
+        } catch {
+          // Rendering should not depend on browser storage.
+        }
       })
       .catch(() => {})
   }, [])
